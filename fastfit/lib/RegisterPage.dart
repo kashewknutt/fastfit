@@ -5,10 +5,10 @@ import 'ProfileScreen.dart';
 
 TextEditingController _emailController = TextEditingController();
 TextEditingController _passwordController = TextEditingController();
-TextEditingController _nameController = TextEditingController();
-TextEditingController _ageController = TextEditingController();
-TextEditingController _heightController = TextEditingController();
-TextEditingController _weightController = TextEditingController();
+TextEditingController _nameController = TextEditingController(text: '');
+TextEditingController _ageController = TextEditingController(text: '');
+TextEditingController _heightController = TextEditingController(text: '');
+TextEditingController _weightController = TextEditingController(text: '');
 
 class RegisterPage extends StatelessWidget {
   Future<void> _registerWithEmailAndPassword(BuildContext context) async {
@@ -22,7 +22,8 @@ class RegisterPage extends StatelessWidget {
 
       if (user != null) {
         // Store additional user details in Firestore
-        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+        FirebaseFirestore.instance.collection('users').add({
+          'uid': user.uid,
           'name': _nameController.text,
           'age': _ageController.text,
           'height': _heightController.text,
