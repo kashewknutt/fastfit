@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "22883390478",
+    "project_id": "vesit-fastfit",
+    "storage_bucket": "vesit-fastfit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22883390478:android:9add198f25f4ac5f52d85f",
+        "android_client_info": {
+          "package_name": "com.example.fastfit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVzHlAD45jS83Ulbp8Dd-oZCrwMII_ZkE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
