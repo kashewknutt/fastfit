@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'Button.dart';
 import 'InputField.dart';
 
 class InputWrapper extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,7 +27,8 @@ class InputWrapper extends StatelessWidget {
             style: TextStyle(color: Colors.grey),
           ),
           SizedBox(height: 40,),
-          Button()
+
+
         ],
       ),
     );

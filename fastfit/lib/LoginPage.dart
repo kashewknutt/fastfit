@@ -1,38 +1,76 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'ProfileScreen.dart';
+import 'RegisterPage.dart';
 
-import 'Header.dart';
-import 'InputWrapper.dart';
+
+TextEditingController _emailController = TextEditingController();
+TextEditingController _passwordController = TextEditingController();
 
 class LoginPage extends StatelessWidget {
+
+  // Login function
+  Future<void> _loginUsingEmailPassword(BuildContext context) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text);
+      User? user = userCredential.user;
+
+      if (user != null) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => ProfileScreen()),
+        );
+      } else {
+        // Handle null user
+        print('Login failed: User is null');
+      }
+    } on FirebaseAuthException catch (e) {
+      print('Login failed: ${e.message}');
+      // Handle login failure
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-            Colors.cyan[500]!,
-            Colors.cyan[300]!,
-            Colors.cyan[400]!
-          ]),
-        ),
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 80,),
-            Header(),
-            Expanded(child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(60),
-                    topRight: Radius.circular(60),
-                  )
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextField(
+                controller: _emailController,
+                decoration: InputDecoration(labelText: 'Email'),
               ),
-              child: InputWrapper(),
-            ))
-          ],
+              TextField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: InputDecoration(labelText: 'Password'),
+              ),
+              SizedBox(height: 24.0),
+              ElevatedButton(
+
+                onPressed: () => _loginUsingEmailPassword(context),
+                child: Text('Login'),
+              ),
+              SizedBox(height: 12.0),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => RegisterPage()), // Navigate to RegisterPage
+                  );
+                },
+                child: Text('Register'),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
+

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class InputField extends StatelessWidget{
+
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -13,7 +18,8 @@ class InputField extends StatelessWidget{
               )
           ),
           child: TextField(
-            decoration: InputDecoration(
+            controller: _emailController,
+            decoration: const InputDecoration(
                 hintText: "Enter your email",
                 hintStyle: TextStyle(color: Colors.grey),
                 border: InputBorder.none
@@ -28,7 +34,8 @@ class InputField extends StatelessWidget{
               )
           ),
           child: TextField(
-            decoration: InputDecoration(
+            controller: _passwordController,
+            decoration: const InputDecoration(
                 hintText: "Enter your password",
                 hintStyle: TextStyle(color: Colors.grey),
                 border: InputBorder.none
