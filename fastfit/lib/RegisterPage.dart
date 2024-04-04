@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 import 'ProfileScreen.dart';
 import 'UserModel.dart';
 
@@ -38,6 +39,16 @@ class RegisterPage extends StatelessWidget {
         // Store additional user details in Firestore
         await FirebaseFirestore.instance.collection('users').doc(user.uid).set(
           newUser.toJson(),
+        );
+
+        String formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).collection('entries').doc(formattedDate).set(
+          {
+            'date': DateFormat('yyyy-MM-dd').format(DateTime.now()),
+            'height': double.parse(_heightController.text),
+            'weight': double.parse(_weightController.text),
+          },
         );
 
         // Navigate to profile screen
